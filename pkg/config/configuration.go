@@ -10,26 +10,27 @@ import (
 
 var (
 	Configured bool
-	Settings   *configuration
+	Settings   *Configuration
 )
 
-type configuration struct {
-	Database database
+type Configuration struct {
+	Database Database
 }
 
-func (c *configuration) Configure() error {
+func (c *Configuration) Configure() error {
 	if err := c.Database.Configure(); err != nil {
 		return err
 	}
 	return nil
 }
 
-type database struct {
+type Database struct {
 	ConnectionString      string
+	DatabaseName          string
 	ProductCollectionName string
 }
 
-func (d *database) Configure() error {
+func (d *Database) Configure() error {
 	err := repository.ConfigureMongo(d.ConnectionString)
 	return err
 }
@@ -45,8 +46,9 @@ func Configure() error {
 
 	flag.CommandLine = flag.NewFlagSetWithEnvPrefix(os.Args[0], "PRODUCTCATALOG", flag.ExitOnError)
 
-	var cfg configuration
+	var cfg Configuration
 	flag.StringVar(&cfg.Database.ConnectionString, "mongo_connection_string", "mongodb://localhost:27017", "MongoDB connection string")
+	flag.StringVar(&cfg.Database.DatabaseName, "database_name", "ProductCatalog", "Primary database name")
 	flag.StringVar(&cfg.Database.ProductCollectionName, "product_collection_name", "Peanuts", "Collection name for products")
 
 	flag.Parse()
