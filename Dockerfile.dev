@@ -1,3 +1,6 @@
+# Sample command to start this up
+# docker build -f Dockerfile.dev -t lokion/productcatalog . && docker run -p 8080:8080 -p 50051:50051 --name productcatalog lokion/productcatalog
+
 FROM golang:1.12
 
 WORKDIR '/app'
