@@ -28,7 +28,7 @@ var _ status.Status
 var _ = runtime.String
 var _ = utilities.NewDoubleArray
 
-func request_Api_GetProduct_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_ApiService_GetProduct_0(ctx context.Context, marshaler runtime.Marshaler, client ApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetProductRequest
 	var metadata runtime.ServerMetadata
 
@@ -55,9 +55,9 @@ func request_Api_GetProduct_0(ctx context.Context, marshaler runtime.Marshaler, 
 
 }
 
-// RegisterApiHandlerFromEndpoint is same as RegisterApiHandler but
+// RegisterApiServiceHandlerFromEndpoint is same as RegisterApiServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterApiHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterApiServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -77,23 +77,23 @@ func RegisterApiHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, 
 		}()
 	}()
 
-	return RegisterApiHandler(ctx, mux, conn)
+	return RegisterApiServiceHandler(ctx, mux, conn)
 }
 
-// RegisterApiHandler registers the http handlers for service Api to "mux".
+// RegisterApiServiceHandler registers the http handlers for service ApiService to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterApiHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterApiHandlerClient(ctx, mux, NewApiClient(conn))
+func RegisterApiServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterApiServiceHandlerClient(ctx, mux, NewApiServiceClient(conn))
 }
 
-// RegisterApiHandlerClient registers the http handlers for service Api
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "ApiClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "ApiClient"
+// RegisterApiServiceHandlerClient registers the http handlers for service ApiService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "ApiServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "ApiServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "ApiClient" to call the correct interceptors.
-func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client ApiClient) error {
+// "ApiServiceClient" to call the correct interceptors.
+func RegisterApiServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client ApiServiceClient) error {
 
-	mux.Handle("GET", pattern_Api_GetProduct_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ApiService_GetProduct_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -102,14 +102,14 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Api_GetProduct_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ApiService_GetProduct_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Api_GetProduct_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ApiService_GetProduct_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -117,9 +117,9 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 }
 
 var (
-	pattern_Api_GetProduct_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"product", "ID"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_ApiService_GetProduct_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"product", "ID"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
-	forward_Api_GetProduct_0 = runtime.ForwardResponseMessage
+	forward_ApiService_GetProduct_0 = runtime.ForwardResponseMessage
 )

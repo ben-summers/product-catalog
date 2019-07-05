@@ -175,7 +175,7 @@ func init() {
 func init() { proto.RegisterFile("service.proto", fileDescriptor_a0b84a42fa06f626) }
 
 var fileDescriptor_a0b84a42fa06f626 = []byte{
-	// 223 bytes of a gzipped FileDescriptorProto
+	// 227 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2d, 0x4e, 0x2d, 0x2a,
 	0xcb, 0x4c, 0x4e, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x4e, 0x2c, 0xc8, 0x94, 0x92,
 	0x49, 0xcf, 0xcf, 0x4f, 0xcf, 0x49, 0xd5, 0x4f, 0x2c, 0xc8, 0xd4, 0x4f, 0xcc, 0xcb, 0xcb, 0x2f,
@@ -186,10 +186,11 @@ var fileDescriptor_a0b84a42fa06f626 = []byte{
 	0xe8, 0x9e, 0x5a, 0x02, 0x35, 0x25, 0x28, 0xb5, 0xb0, 0x34, 0xb5, 0x18, 0xc3, 0x30, 0x25, 0x1f,
 	0x2e, 0x21, 0x64, 0x45, 0xc5, 0x05, 0xf9, 0x79, 0xc5, 0xa9, 0x18, 0x56, 0xaa, 0x71, 0xb1, 0x17,
 	0x40, 0x94, 0x80, 0x6d, 0xe5, 0x36, 0xe2, 0xd1, 0x4b, 0x2c, 0xc8, 0xd4, 0x83, 0x69, 0x83, 0x49,
-	0x1a, 0x45, 0x73, 0x31, 0x3b, 0x16, 0x64, 0x0a, 0x85, 0x70, 0x71, 0x21, 0x0c, 0x15, 0x12, 0x03,
-	0xab, 0xc5, 0x70, 0x8a, 0x94, 0x38, 0x86, 0x38, 0xc4, 0x76, 0x25, 0xd1, 0xa6, 0xcb, 0x4f, 0x26,
-	0x33, 0xf1, 0x0b, 0xf1, 0xea, 0x43, 0xcd, 0xd5, 0xaf, 0xf6, 0x74, 0xa9, 0x4d, 0x62, 0x03, 0x87,
-	0x8c, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0x61, 0x86, 0x17, 0xc9, 0x4d, 0x01, 0x00, 0x00,
+	0x1a, 0x25, 0x71, 0x71, 0x39, 0x16, 0x64, 0x06, 0x43, 0x3c, 0x2b, 0x14, 0xc2, 0xc5, 0x85, 0x30,
+	0x5b, 0x48, 0x0c, 0xac, 0x05, 0xc3, 0x45, 0x52, 0xe2, 0x18, 0xe2, 0x10, 0x47, 0x28, 0x89, 0x36,
+	0x5d, 0x7e, 0x32, 0x99, 0x89, 0x5f, 0x88, 0x57, 0x1f, 0x6a, 0xbc, 0x7e, 0xb5, 0xa7, 0x4b, 0x6d,
+	0x12, 0x1b, 0x38, 0x80, 0x8c, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x52, 0x16, 0xe4, 0x5f, 0x54,
+	0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -200,72 +201,72 @@ var _ grpc.ClientConn
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
-// ApiClient is the client API for Api service.
+// ApiServiceClient is the client API for ApiService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type ApiClient interface {
+type ApiServiceClient interface {
 	GetProduct(ctx context.Context, in *GetProductRequest, opts ...grpc.CallOption) (*GetProductResponse, error)
 }
 
-type apiClient struct {
+type apiServiceClient struct {
 	cc *grpc.ClientConn
 }
 
-func NewApiClient(cc *grpc.ClientConn) ApiClient {
-	return &apiClient{cc}
+func NewApiServiceClient(cc *grpc.ClientConn) ApiServiceClient {
+	return &apiServiceClient{cc}
 }
 
-func (c *apiClient) GetProduct(ctx context.Context, in *GetProductRequest, opts ...grpc.CallOption) (*GetProductResponse, error) {
+func (c *apiServiceClient) GetProduct(ctx context.Context, in *GetProductRequest, opts ...grpc.CallOption) (*GetProductResponse, error) {
 	out := new(GetProductResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetProduct", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.ApiService/GetProduct", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ApiServer is the server API for Api service.
-type ApiServer interface {
+// ApiServiceServer is the server API for ApiService service.
+type ApiServiceServer interface {
 	GetProduct(context.Context, *GetProductRequest) (*GetProductResponse, error)
 }
 
-// UnimplementedApiServer can be embedded to have forward compatible implementations.
-type UnimplementedApiServer struct {
+// UnimplementedApiServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedApiServiceServer struct {
 }
 
-func (*UnimplementedApiServer) GetProduct(ctx context.Context, req *GetProductRequest) (*GetProductResponse, error) {
+func (*UnimplementedApiServiceServer) GetProduct(ctx context.Context, req *GetProductRequest) (*GetProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProduct not implemented")
 }
 
-func RegisterApiServer(s *grpc.Server, srv ApiServer) {
-	s.RegisterService(&_Api_serviceDesc, srv)
+func RegisterApiServiceServer(s *grpc.Server, srv ApiServiceServer) {
+	s.RegisterService(&_ApiService_serviceDesc, srv)
 }
 
-func _Api_GetProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ApiService_GetProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetProductRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).GetProduct(ctx, in)
+		return srv.(ApiServiceServer).GetProduct(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/GetProduct",
+		FullMethod: "/api.ApiService/GetProduct",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetProduct(ctx, req.(*GetProductRequest))
+		return srv.(ApiServiceServer).GetProduct(ctx, req.(*GetProductRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Api_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "api.Api",
-	HandlerType: (*ApiServer)(nil),
+var _ApiService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "api.ApiService",
+	HandlerType: (*ApiServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetProduct",
-			Handler:    _Api_GetProduct_Handler,
+			Handler:    _ApiService_GetProduct_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

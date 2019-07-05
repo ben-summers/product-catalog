@@ -20,7 +20,7 @@ message GetProductResponse {
     Product product = 2;
 }
 
-service Api {
+service ApiService {
     rpc GetProduct(GetProductRequest) returns (GetProductResponse) {
         option (google.api.http) = {
             get: "/product/{ID}"
