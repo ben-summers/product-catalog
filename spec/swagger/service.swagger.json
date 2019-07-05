@@ -1,0 +1,70 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "service.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/product/{ID}": {
+      "get": {
+        "operationId": "GetProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetProductResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Api"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiGetProductResponse": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "product": {
+          "$ref": "#/definitions/apiProduct"
+        }
+      }
+    },
+    "apiProduct": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
